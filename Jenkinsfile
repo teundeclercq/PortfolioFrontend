@@ -15,13 +15,16 @@ ng build --prod'''
     }
     stage('Clean') {
       steps {
-        sh '''
+        sh '''def params = [
+        dirname: \'hde\',
+        path: \'/usr/tmp/jenkins/hde/filename.txt\'
+]
 // Using String.contains()
 if (params.path.contains(params.dirname)) {
-Â  Â  println "Path \'${params.path}\' contains \'${params.dirname}\'"
-Â  Â Â rm -r /var/www/portfolios4.teun-school.nl/html/dist
+   println "Path \'${params.path}\' contains \'${params.dirname}\'"
+   rm -r /var/www/portfolios4.teun-school.nl/html/dist
 } else {
-Â  Â  println "no dist folder found"
+   println "no dist folder found"
 }
 '''
         }
