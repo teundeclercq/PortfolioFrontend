@@ -8,7 +8,9 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'npm build'
+        sh '''
+#!/bin/bash
+npm build --prod'''
       }
     }
   }
