@@ -8,7 +8,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh '''
+        sh '''echo $PWD
 #!/bin/bash
 npm build --prod'''
       }
