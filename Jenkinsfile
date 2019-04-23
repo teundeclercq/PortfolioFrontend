@@ -1,8 +1,8 @@
 pipeline {
   agent any
   def params = [
-        dirname: 'dist',
-        path: '/var/www/portfolios4.teun-school.nl/html'
+        dirname: '/dist',
+        path: '/var/www/portfolios4.teun-school.nl/html\/'
   ]
   stages {
     stage('Initialize') {
