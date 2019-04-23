@@ -1,0 +1,11 @@
+.example-card {
+  max-width: 400px;
+  border: solid black 1px;
+  background: rgba(0,0,0,0.25);
+  color: white;
+
+}
+.example-header-image {
+  background-image: url('~src/assets/img_avatar3.png');
+  background-size: cover;
+}
