@@ -1,9 +1,6 @@
 pipeline {
   agent any
-  def params = [
-        dirname: \'hde\',
-        path: \'/usr/tmp/jenkins/hde/filename.txt\'
-  ]
+  
   stages {
     stage('Initialize') {
       steps {
@@ -20,6 +17,10 @@ ng build --prod'''
     stage('Clean') {
       steps {
         sh '''
+        def params = [
+        dirname: \'hde\',
+        path: \'/usr/tmp/jenkins/hde/filename.txt\'
+  ]
 // Using String.contains()
 if (params.path.contains(params.dirname)) {
    println "Path \'${params.path}\' contains \'${params.dirname}\'"
