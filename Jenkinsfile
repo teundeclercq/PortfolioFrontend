@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  def params = [
+Â  Â  Â  Â  dirname: 'dist',
+Â  Â  Â  Â  path: '/var/www/portfolios4.teun-school.nl/html'
+  ]
   stages {
     stage('Initialize') {
       steps {
@@ -15,16 +19,13 @@ ng build --prod'''
     }
     stage('Clean') {
       steps {
-        sh '''def params = [
-        dirname: \'dist\',
-        path: \'/var/www/portfolios4.teun-school.nl/html/\'
-]
+        sh '''
 // Using String.contains()
 if (params.path.contains(params.dirname)) {
-    println "Path \'${params.path}\' contains \'${params.dirname}\'"
-    rm -r /var/www/portfolios4.teun-school.nl/html/dist
+Â  Â  println "Path \'${params.path}\' contains \'${params.dirname}\'"
+Â  Â Â rm -r /var/www/portfolios4.teun-school.nl/html/dist
 } else {
-    println "no dist folder found"
+Â  Â  println "no dist folder found"
 }
 '''
         }
