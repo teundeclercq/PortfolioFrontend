@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh '''echo $PWD
 #!/bin/bash
-ng build --prod'''
+sudo ng build --prod'''
       }
     }
   }
