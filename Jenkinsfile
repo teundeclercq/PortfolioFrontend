@@ -9,30 +9,18 @@ pipeline {
     stage('build') {
       steps {
         sh '''echo $PWD
-#!/bin/bash
-ng build --prod'''
+              #!/bin/bash
+              ng build --prod'''
       }
     }
     stage('Clean') {
       steps {
-        sh '''if [ -d "/var/www/portfolios4.teun-school.nl/html/dist" ]; then rm -r /var/www/portfolios4.teun-school.nl/html/dist; fi
-
-'''
+        sh '''if [ -d "/var/www/portfolios4.teun-school.nl/html/dist" ]; then rm -r /var/www/portfolios4.teun-school.nl/html/dist; fi'''
       }
     }
     stage('deploy') {
       steps {
-        sh '''cp -r /var/lib/jenkins/workspace/PortfolioFrontend_master/dist /var/www/portfolios4.teun-school.nl/html
-
-
-
-
-
-
-
-
-
-'''
+        sh '''cp -r /var/lib/jenkins/workspace/PortfolioFrontend_master/dist /var/www/portfolios4.teun-school.nl/html'''
       }
     }
   }
