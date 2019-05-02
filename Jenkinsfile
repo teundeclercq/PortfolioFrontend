@@ -16,8 +16,7 @@ pipeline {
     stage('Sonarqube analyses'){
       steps {
         sh '''sonar-scanner
-              -Dsonar.host.url=https://sonarqube.teun-school.nl
-              -Dsonar.login=096ca67bd49d0120d18114f150696e228e899914'''
+             '''
       }
     }
     stage('Clean') {
