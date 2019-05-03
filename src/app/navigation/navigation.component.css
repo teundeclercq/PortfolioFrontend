@@ -5,3 +5,9 @@
 .navbar a {
   color: white;
 }
+.nav-link.active {
+  background-color: slategray;
+  border-radius: 10px;
+}
+
+

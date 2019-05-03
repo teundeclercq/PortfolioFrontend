@@ -9,6 +9,10 @@ import { ContactComponent } from './contact/contact.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MatButtonModule, MatCardModule} from '@angular/material';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -19,12 +23,15 @@ import {MatButtonModule, MatCardModule} from '@angular/material';
     PortfolioComponent,
     ContactComponent,
     NavigationComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    NgbCollapseModule,
 
   ],
   providers: [],
