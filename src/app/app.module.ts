@@ -10,10 +10,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MatButtonModule, MatCardModule} from '@angular/material';
 import { LoginComponent } from './login/login.component';
+import { NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule} from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
-import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
-
-
+import { EditUserComponent } from './edit-user/edit-user.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {firebaseConfig} from './app-firebase.module';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AuthService} from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,7 @@ import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +38,12 @@ import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
     MatCardModule,
     MatButtonModule,
     NgbCollapseModule,
-
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(firebaseConfig.firebaseConfig),
+    AngularFireAuthModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthService],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

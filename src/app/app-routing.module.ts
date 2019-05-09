@@ -6,6 +6,7 @@ import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {PortfolioComponent} from "./portfolio/portfolio.component";
 import {RegisterComponent} from "./register/register.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "home", component: HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "portfolio", component: PortfolioComponent},
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
+  { path: "edit-user", component: EditUserComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
