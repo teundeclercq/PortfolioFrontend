@@ -1,0 +1,23 @@
+<div class="row">
+<div class="center-screen">
+  <div class="login-container">
+    <h1 class="display-4">Login</h1>
+    <div class="form-group">
+      <label for="Email">Email address</label>
+      <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email"
+             #userEmail required autofocus>
+      <small id="emailHelp" class="form-text text-muted">We gebruiken het alleen om je in te loggen.</small>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" #userPassword required>
+    </div>
+    <button class="btn btn-primary" (click)="logUserIn(userEmail.value, userPassword.value)">
+      Submit
+    </button>
+    <hr/>
+    Nog geen account? <a routerLink="user/register">Registreer je dan hier.</a>
+  </div>
+</div>
+</div>
+
