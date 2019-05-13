@@ -20,8 +20,8 @@ export class AuthService {
   }
   async login(email: string, password: string) {
     try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-        // .then(() => this.router.navigate(["boekingen"]));
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        .then(() => this.router.navigate(["portfolio"]));
     } catch (e) {
       alert('Error!'  +  e.message);
     }
@@ -29,8 +29,8 @@ export class AuthService {
 
   async register(email: string, password: string) {
     try {
-      await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-        // .then(() => this.router.navigate(["boekingen"]));
+      await this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+        .then(() => this.router.navigate(["portfolio"]));
     } catch (e) {
       alert("Error!" + e.message);
     }

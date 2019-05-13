@@ -15,4 +15,7 @@ label {
 p {
   font-size: 10px;
 }
-
+button.mat-raised-button {
+  background-color: #5972b6;
+  color: white;
+}
