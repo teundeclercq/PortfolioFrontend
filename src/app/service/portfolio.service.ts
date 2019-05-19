@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {PortfolioModel} from '../model/portfolio.model';
-import {HttpClient} from '@angular/common/http';
-import {Subject} from 'rxjs';
-import {AuthService} from './auth.service';
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs";
+import {PortfolioModel} from "../model/portfolio.model";
+import {AuthService} from "./auth.service";
 
 @Injectable()
 export class PortfolioService {
@@ -15,7 +15,7 @@ export class PortfolioService {
   public getPortfoliosById() {
     // Use http to connect to backend.
     // Gets the Portfolios by User ID of the user that is logged in with Firebase.
-    this.http.get("http://localhost:8081/Portfolio/ByUID/" + this.auth.getUser().uid)
+    this.http.get("http://localhost:8081/Portfolio/AllByUID/" + this.auth.getUser().uid)
       .subscribe((response: PortfolioModel[]) => {
         this.portfolios = response;
         this.portfoliosChanged.next(this.portfolios.slice());

@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {User} from 'firebase';
-import {Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {Router} from "@angular/router";
+import {User} from "firebase";
+import {Observable, of} from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -20,30 +20,30 @@ export class AuthService {
       }
     });
   }
-  async login(email: string, password: string) {
+  public async login(email: string, password: string) {
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then(() => this.router.navigate(["portfolio"]));
     } catch (e) {
-      alert('Error!'  +  e.message);
+      alert("Error!"  +  e.message);
     }
   }
 
-  async register(email: string, password: string) {
+  public async register(email: string, password: string) {
     try {
       await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
     } catch (e) {
       alert("Error!" + e.message);
     }
   }
-  async sendUserCreds() {
+  public async sendUserCreds() {
     try {
       await this.http.post("http://localhost:8081/User/AddUser" , this.afAuth.auth.currentUser.uid).subscribe();
     } catch (e) {
       alert("error!" + e.message);
     }
   }
-  async logout() {
+  public async logout() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem("user");
   }

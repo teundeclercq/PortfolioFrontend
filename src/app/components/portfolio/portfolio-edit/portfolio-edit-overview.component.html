@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit(portfolioForm)" #portfolioForm="ngForm">
+  <h1 mat-dialog-title [ngModel]="data.title">{{data.title}}</h1>
+  <div mat-dialog-content>
+    <p>Title</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.title">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-content>
+    <p>subtitle</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.subtitle">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field>
+    <textarea matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button
+            [mat-dialog-close]="data.title"
+            cdkFocusInitial
+            [disabled]="!portfolioForm.valid">{{editMode ? 'Update' : 'Add'}}</button>
+  </div>
+</form>
