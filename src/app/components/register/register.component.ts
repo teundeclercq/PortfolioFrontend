@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -9,19 +10,21 @@ import {AuthService} from '../../service/auth.service';
 export class RegisterComponent implements OnInit {
 
   // addForm: FormGroup;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private http: HttpClient) { }
 
   ngOnInit() {
-    // this.addForm = this.formBuilder.group({
-    //   id: [],
-    //   email: ["", Validators.required],
-    //   password: ["", Validators.required],
-    //   firstName: ["", Validators.required],
-    //   lastName: ["", Validators.required],
-    // });
+
   }
   async registerUser(username, password) {
-    this.authService.register(username, password);
+    this.authService.register(username, password).then(() => {
+        let userid = this.authService.getUser().uid;
+        console.log(userid);
+        this.http.post("http://localhost:8081/User/AddUser/" , userid).subscribe((result: JSON) => {
+          // tslint:disable-next-line:no-console
+          console.log(result);
+        });
+    });
   }
 
 }

@@ -19,6 +19,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthService} from './service/auth.service';
 import {UserGuard} from './service/user.guard';
+import { PortfolioEditComponent } from './components/portfolio/portfolio-edit/portfolio-edit.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {UserGuard} from './service/user.guard';
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
+    PortfolioEditComponent,
   ],
   imports: [
     BrowserModule,
