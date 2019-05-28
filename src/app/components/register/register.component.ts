@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
 import {HttpClient} from '@angular/common/http';
+import {Role} from '../../model/role.model';
 
 @Component({
   selector: 'app-register',
@@ -8,11 +9,12 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  public roleUser: Role.User;
 
   // addForm: FormGroup;
   constructor(private authService: AuthService,
-              private http: HttpClient) { }
-
+              private http: HttpClient,
+              private role: Role) { }
   ngOnInit() {
 
   }

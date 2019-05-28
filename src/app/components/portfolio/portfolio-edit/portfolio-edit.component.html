@@ -1,48 +1,30 @@
-<!--<div class="row">-->
-<!--  <div class="col-xs-12">-->
-<!--    <form (ngSubmit)="onSubmit(portfolioForm)" #portfolioForm="ngForm">-->
-<!--      <div class="row">-->
-<!--        <div class="col-sm-5 form-group">-->
-<!--          <label for="title" style="color: skyblue;">Title</label>-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="title"-->
-<!--            name="name"-->
-<!--            class="form-control"-->
-<!--            ngModel-->
-<!--            required>-->
-<!--        </div>-->
-<!--        <div class="col-sm-2 form-group">-->
-<!--          <label for="subtitle" style="color: skyblue;">Subtitle</label>-->
-<!--          &lt;!&ndash;  pattern kan niet lager dan 0 invoeren.    pattern="^[1-9]+[0-9]*$"&ndash;&gt;-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="subtitle"-->
-<!--            name="name"-->
-<!--            class="form-control"-->
-<!--            required-->
-<!--            ngModel>-->
-<!--        </div>-->
-<!--        <div class="col-sm-5 form-group">-->
-<!--          <label for="content" style="color: skyblue;">Title</label>-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="content"-->
-<!--            name="name"-->
-<!--            class="form-control"-->
-<!--            ngModel-->
-<!--            required>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="row">-->
-<!--        <div class="col-xs-12 form-group">-->
-<!--          <button-->
-<!--            mat-raised-button-->
-<!--            type="submit"-->
-<!--            [disabled]="!portfolioForm.valid">{{editMode ? 'Update' : 'Add'}}</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
-<button mat-raised-button (click)="openDialog()">open dialog</button>
+<div class="container">
+  <div class="center-screen" *ngIf="portfolios.length === 0; else showPortfolios">
+    <div class="container">
+      <button mat-raised-button (click)="openDialog()">Creeër een PortfolioModel</button>
+    </div>
+  </div>
+</div>
+<ng-template #showPortfolios>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let portfolio of portfolios; let i = index;">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{portfolio.title}}</mat-card-title>
+          <mat-card-subtitle>{{portfolio.subtitle}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="data:image/jpeg;base64,{{portfolio.portfolioImage}}" class="example-header-image">
+        <mat-card-content>
+          <p>
+            {{portfolio.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="deletePortfolio(i)">delete</button>
+          <button mat-button (click)="openDialog()">update</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>
+

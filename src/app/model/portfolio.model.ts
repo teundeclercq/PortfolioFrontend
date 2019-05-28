@@ -1,3 +1,10 @@
-export class PortfolioModel {
-  constructor(public id: number, public title: string, public subtitle: string, public content: string, public image: string) {}
+import {User} from './user.model';
+
+export class Portfolio {
+  public id?: number;
+  public title?: string;
+  public subtitle?: string;
+  public portfolioImage?: string;
+  public description?: string;
+  public user?: User;
 }

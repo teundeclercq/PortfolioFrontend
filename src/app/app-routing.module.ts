@@ -7,14 +7,18 @@ import {LoginComponent} from "./components/login/login.component";
 import {PortfolioComponent} from "./components/portfolio/portfolio.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {UserGuard} from "./service/user.guard";
+import {DocumentsComponent} from './components/admin/documents/documents.component';
+import {UsersComponent} from './components/admin/users/users.component';
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "home", component: HomeComponent},
   { path: "about", component: AboutComponent},
   { path: "contact", component: ContactComponent},
-  { path: "portfolio", component: PortfolioComponent},
+  { path: "portfolio", component: PortfolioComponent, canActivate: [UserGuard]},
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
+  { path: "documents", component: DocumentsComponent },
+  { path: "users", component: UsersComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

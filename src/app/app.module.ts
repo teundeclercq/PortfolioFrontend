@@ -22,6 +22,8 @@ import { RegisterComponent } from "./components/register/register.component";
 import {AuthService} from "./service/auth.service";
 import {PortfolioService} from "./service/portfolio.service";
 import {UserGuard} from "./service/user.guard";
+import { UsersComponent } from './components/admin/users/users.component';
+import { DocumentsComponent } from './components/admin/documents/documents.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -36,6 +38,8 @@ import {UserGuard} from "./service/user.guard";
     RegisterComponent,
     PortfolioEditComponent,
     PortfolioEditOverviewComponent,
+    UsersComponent,
+    DocumentsComponent,
   ],
   entryComponents: [PortfolioEditComponent, PortfolioEditOverviewComponent],
   imports: [

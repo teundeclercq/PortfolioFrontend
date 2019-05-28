@@ -8,6 +8,9 @@ import {Observable, of} from "rxjs";
 @Injectable()
 export class AuthService {
   public user: User;
+  public allowedIds: string [] = [
+    "X8mspRxFdAOEkpzKSzLAqZbMgKf1",
+  ];
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
               public http: HttpClient) {
@@ -23,7 +26,9 @@ export class AuthService {
   public async login(email: string, password: string) {
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .then(() => this.router.navigate(["portfolio"]));
+        .then(() => {
+          this.router.navigate(["portfolio"]);
+        });
     } catch (e) {
       alert("Error!"  +  e.message);
     }
@@ -36,18 +41,10 @@ export class AuthService {
       alert("Error!" + e.message);
     }
   }
-  public async sendUserCreds() {
-    try {
-      await this.http.post("http://localhost:8081/User/AddUser" , this.afAuth.auth.currentUser.uid).subscribe();
-    } catch (e) {
-      alert("error!" + e.message);
-    }
-  }
   public async logout() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem("user");
   }
-
   public get isLoggedIn(): any {
     const  user  =  JSON.parse(localStorage.getItem("user"));
     return user !== null;
@@ -62,5 +59,10 @@ export class AuthService {
 
   public getUser() {
     return this.afAuth.auth.currentUser;
+  }
+  public isAdmin(id: string): boolean {
+    return this.allowedIds.some((element) => {
+      return (this.user && id === element);
+    });
   }
 }

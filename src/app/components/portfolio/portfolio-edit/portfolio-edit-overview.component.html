@@ -1,30 +1,24 @@
-<form (ngSubmit)="onSubmit(portfolioForm)" #portfolioForm="ngForm">
-  <h1 mat-dialog-title [ngModel]="data.title">{{data.title}}</h1>
-  <div mat-dialog-content>
-    <p>Title</p>
-    <mat-form-field>
-      <input matInput [(ngModel)]="data.title">
-    </mat-form-field>
+<h1 mat-dialog-title>PortfolioModel</h1>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" placeholder="Enter Title of the PortfolioModel" ngModel class="form-control" required>
   </div>
-  <div mat-dialog-content>
-    <p>subtitle</p>
-    <mat-form-field>
-      <input matInput [(ngModel)]="data.subtitle">
-    </mat-form-field>
+  <div class="form-group">
+    <label for="subtitle">Subtitle</label>
+    <input type="text" id="subtitle" name="subtitle" placeholder="Enter Subtitle of the PortfolioModel" ngModel class="form-control" required>
   </div>
-  <div mat-dialog-content>
-    <mat-form-field>
-    <textarea matInput
-              cdkTextareaAutosize
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" (change)="onFileSelected($event)" name="image" id="image" class="form-control" required ngModel accept=".image/jpeg, image/png">
+  </div>
+  <div class="form-group">
+    <label for="description">Content</label>
+    <textarea type="text" id="description" name="description" placeholder="Enter Subtitle of the PortfolioModel" ngModel class="form-control" required cdkTextareaAutosize
               cdkAutosizeMinRows="2"
               cdkAutosizeMaxRows="5"></textarea>
-    </mat-form-field>
   </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button
-            [mat-dialog-close]="data.title"
-            cdkFocusInitial
-            [disabled]="!portfolioForm.valid">{{editMode ? 'Update' : 'Add'}}</button>
-  </div>
+  <button mat-raised-button type="submit">submit</button>
+  <button mat-raised-button8 (click)="onNoClick()">No Thanks</button>
 </form>
+

@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav">
         <li *ngIf="!userLoggedIn();" class="nav-item"><a class="nav-link" id="home-tab" routerLink="home" href="#home" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="home">Home</a></li>
         <li *ngIf="!userLoggedIn();" class="nav-item"><a class="nav-link" id="about-tab" routerLink="about" href="#about" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="about">About</a></li>
-        <li *ngIf="userLoggedIn();" class="nav-item"><a class="nav-link" id="portfolio-tab" routerLink="portfolio" href="#portfolio" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="portfolio">Portfolio</a></li>
+        <li *ngIf="userLoggedIn();" class="nav-item"><a class="nav-link" id="portfolio-tab" routerLink="portfolio" href="#portfolio" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="portfolio">PortfolioModel</a></li>
         <li class="nav-item"><a class="nav-link" id="contact-tab" routerLink="contact" href="#contact" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="contact">Contact</a></li>
         <li *ngIf="userLoggedIn(); else loggedOut" class="nav-item"><a class="nav-link" (click)="logoutUser()">Logout</a></li>
         <ng-template #loggedOut>
