@@ -18,12 +18,12 @@ import { LoginComponent } from "./components/login/login.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
 import {PortfolioEditComponent, PortfolioEditOverviewComponent} from "./components/portfolio/portfolio-edit/portfolio-edit.component";
 import { PortfolioComponent } from "./components/portfolio/portfolio.component";
-import { RegisterComponent } from "./components/register/register.component";
 import {AuthService} from "./service/auth.service";
 import {PortfolioService} from "./service/portfolio.service";
 import {UserGuard} from "./service/user.guard";
 import { UsersComponent } from './components/admin/users/users.component';
 import { DocumentsComponent } from './components/admin/documents/documents.component';
+import {RegisterComponent} from './components/register/register.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -35,11 +35,11 @@ import { DocumentsComponent } from './components/admin/documents/documents.compo
     ContactComponent,
     NavigationComponent,
     LoginComponent,
-    RegisterComponent,
     PortfolioEditComponent,
     PortfolioEditOverviewComponent,
     UsersComponent,
     DocumentsComponent,
+    RegisterComponent,
   ],
   entryComponents: [PortfolioEditComponent, PortfolioEditOverviewComponent],
   imports: [

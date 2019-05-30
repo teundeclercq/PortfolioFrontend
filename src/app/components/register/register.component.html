@@ -3,16 +3,16 @@
     <div class="user-container">
       <h1 class="display-4">Register</h1>
       <div class="form-group">
-        <label for="Email">Email address</label>
-        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email"
-               #userEmail required autofocus>
+        <label for="EmailRegister">Email address</label>
+        <input type="emailRegister" class="form-control" id="EmailRegister" aria-describedby="emailHelp" placeholder="Enter email"
+               #userRegisterEmail required autofocus>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" #userPassword required>
+        <label for="passwordRegister">Password</label>
+        <input type="passwordRegister" class="form-control" id="passwordRegister" placeholder="Password" #userRegisterPassword required>
       </div>
-      <button mat-raised-button (click)="registerUser(userEmail.value, userPassword.value)">
-        Register
+      <button mat-raised-button (click)="registerUser(userRegisterEmail.value, userRegisterPassword.value)">
+        Submit
       </button>
     </div>
   </div>

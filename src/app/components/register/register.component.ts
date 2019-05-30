@@ -8,17 +8,10 @@ import {Role} from '../../model/role.model';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-  public roleUser: Role.User;
-
-  // addForm: FormGroup;
+export class RegisterComponent {
   constructor(private authService: AuthService,
-              private http: HttpClient,
-              private role: Role) { }
-  ngOnInit() {
-
-  }
-  async registerUser(username, password) {
+              private http: HttpClient) { }
+  public registerUser(username, password) {
     this.authService.register(username, password).then(() => {
         let userid = this.authService.getUser().uid;
         console.log(userid);

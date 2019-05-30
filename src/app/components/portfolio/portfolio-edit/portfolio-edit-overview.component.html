@@ -18,6 +18,11 @@
               cdkAutosizeMinRows="2"
               cdkAutosizeMaxRows="5"></textarea>
   </div>
+  <div class="form-group">
+    <label for="bestand">Image</label>
+    <input type="file" (change)="onFileSelected($event)" name="image" id="bestand" class="form-control" ngModel accept=".docx,.doc,.pdf,application/pdf,application/msword,
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+  </div>
   <button mat-raised-button type="submit">submit</button>
   <button mat-raised-button8 (click)="onNoClick()">No Thanks</button>
 </form>
