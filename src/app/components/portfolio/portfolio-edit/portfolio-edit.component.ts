@@ -6,7 +6,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {DialogData} from './DialogData';
 import {AuthService} from '../../../service/auth.service';
 import {NgForm} from '@angular/forms';
-import {User} from '../../../model/user.model';
+import {UserModel} from '../../../model/user.model';
 
 @Component({
   selector: 'app-portfolio-edit',
@@ -52,7 +52,7 @@ export class PortfolioEditComponent implements OnInit {
 })
 export class PortfolioEditOverviewComponent implements OnInit, OnDestroy {
   private editMode = false;
-  private user: User = new User();
+  private user: UserModel = new UserModel();
   private portfolio: Portfolio = new Portfolio();
   private subscription: Subscription;
   private editedPortolfioIndex: number;

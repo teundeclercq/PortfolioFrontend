@@ -14,7 +14,7 @@ export class PortfolioService {
               private auth: AuthService) {}
   public getPortfoliosById() {
     // Use http to connect to backend.
-    // Gets the Portfolios by User ID of the user that is logged in with Firebase.
+    // Gets the Portfolios by UserModel ID of the user that is logged in with Firebase.
     this.http.get("http://localhost:8081/Portfolio/AllByUID/" + this.auth.getUser().uid)
       .subscribe((response: Portfolio[]) => {
         this.portfolios = response;

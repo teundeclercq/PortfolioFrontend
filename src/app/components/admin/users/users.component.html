@@ -3,34 +3,35 @@
     <div class="col-md-12">
       <div class="alert alert-danger">
         <h4 class="alert-heading">Oops!</h4>
-        <p>It appears you aren't a travel agent. If you are, please hang tight, we're loading your data.</p>
+        <p>It appears you aren't a admin. If you are, please hang tight, we're loading your data.</p>
         <hr>
-        <p class="mb-0">You can also return to the <a routerLink="/">homepage</a>.</p>
+        <p class="mb-0">You can also return to the <a routerLink="/">Login</a>.</p>
       </div>
     </div>
   </div>
   <div *ngIf="checkAdmin()" class="row">
-    <div class="col-md-8 offset-2">
-      <table class="table">
-        <thead> 
+    <div class="col-md-6">
+      <table class="table table-responsive">
+        <thead>
         <tr>
-          <th scope="col">Id</th>
-          <th scope="col">documentName</th>
-          <th scope="col">documentType</th>
-          <th scope="col">data</th>
+          <th class="tableData" scope="col">Id</th>
+          <th class="tableData" scope="col">UserName</th>
+          <th class="tableData" scope="col">Email</th>
+          <th class="tableData" scope="col">Role</th>
         </tr>
         </thead>
         <tbody>
-        <!--        add ngfor loop here for populate tr with user-->
-        <tr>
-          <th scope="row">idUser</th>
-          <td>UserName</td>
-          <td>UserRole</td>
-          <td><button class="mat-raised-button">Delete</button></td>
-          <td><button class="mat-raised-button"> "Add to Admin" : "Remove from admin group"</button></td>
+        <tr *ngFor="let user of users; let i = index;">
+          <td class="tableData">{{user.id}}</td>
+          <td class="tableData">{{user.username}}</td>
+          <td class="tableData">{{user.email}}</td>
+          <td class="tableData">{{user.role}}</td>
+          <td class="tableButton"><button class="mat-raised-button" (click)="deleteUser(i, user.id)">Delete</button></td>
+          <td class="tableButton"><button class="mat-raised-button" (click)="UpdateUser(i, user.id)">{{isUserAdmin(user.role) ? "Promote to Admin" : "Demote to User"}}</button></td>
         </tr>
         </tbody>
       </table>
     </div>
+
   </div>
 </div>

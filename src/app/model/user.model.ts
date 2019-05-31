@@ -1,7 +1,9 @@
-import {Role} from './role.model';
+import {Role} from "./role.model";
 
-export class User {
+export class UserModel {
   public id: string;
+  public username: string;
+  public email: string;
   public role: Role;
-  constructor() {}
+  constructor() { }
 }

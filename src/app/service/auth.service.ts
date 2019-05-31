@@ -3,13 +3,15 @@ import {Injectable} from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {Router} from "@angular/router";
 import {User} from "firebase";
-import {Observable, of} from "rxjs";
-
+import {UserModel} from '../model/user.model';
+import {Observable, of, Subject} from 'rxjs';
+import {Admin} from "../model/admin.model";
 @Injectable()
 export class AuthService {
   public user: User;
-  public allowedIds: string [] = [
-    "X8mspRxFdAOEkpzKSzLAqZbMgKf1",
+  private API_URL_DEV = "http://localhost:8081/User/";
+  public allowedIdsChanged = new Subject<UserModel[]>();
+  public allowedIds: UserModel [] = [
   ];
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -23,20 +25,36 @@ export class AuthService {
       }
     });
   }
+  public getAdmins() {
+    return this.http.get(`${this.API_URL_DEV}roleAdmin/`).subscribe((response: UserModel[]) => {
+      this.allowedIds = response;
+      this.allowedIdsChanged.next(this.allowedIds.slice());
+      console.log(this.allowedIds);
+    });
+  }
   public async login(email: string, password: string) {
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-          this.router.navigate(["portfolio"]);
+        .then((user = JSON.parse(localStorage.getItem("user"))) => {
+          if (this.isAdmin(user.user.uid)) {
+            this.router.navigate(["users"]);
+          } else {
+            this.router.navigate(["portfolio"]);
+          }
         });
     } catch (e) {
       alert("Error!"  +  e.message);
     }
   }
-
+  public  deleteUser(userId: string) {
+    // nothing happens... yet..
+  }
   public async register(email: string, password: string) {
     try {
-      await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      await this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          this.router.navigate(["portfolio"]);
+        });
     } catch (e) {
       alert("Error!" + e.message);
     }
@@ -60,9 +78,18 @@ export class AuthService {
   public getUser() {
     return this.afAuth.auth.currentUser;
   }
+  public async isAdminLoggedIn() {
+    await this.afAuth.authState.subscribe((user) => {
+      if (this.isAdmin(user.uid)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
   public isAdmin(id: string): boolean {
     return this.allowedIds.some((element) => {
-      return (this.user && id === element);
+      return (this.user && id === element.id);
     });
   }
 }

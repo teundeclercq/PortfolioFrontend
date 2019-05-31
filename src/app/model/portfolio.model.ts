@@ -1,4 +1,4 @@
-import {User} from './user.model';
+import {UserModel} from './user.model';
 
 export class Portfolio {
   public id?: number;
@@ -6,5 +6,5 @@ export class Portfolio {
   public subtitle?: string;
   public portfolioImage?: string;
   public description?: string;
-  public user?: User;
+  public user?: UserModel;
 }
