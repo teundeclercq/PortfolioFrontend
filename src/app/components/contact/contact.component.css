@@ -1,0 +1,11 @@
+.example-card {
+  max-width: 400px;
+  background: rgba(0,0,0,0.25);
+  color: white;
+}
+
+.example-card mat-card-content {
+  font-size: 20px;
+  padding: 20px;
+}
+

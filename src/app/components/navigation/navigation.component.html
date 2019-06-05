@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="/assets/afbeeldingLogoPortfolio.png" width="50" height="60" alt="logo">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarPortfolio">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-right" id="navbarPortfolio">
+      <ul class="nav navbar-nav">
+        <li *ngIf="!userLoggedIn();" class="nav-item"><a class="nav-link" id="home-tab" routerLink="home" href="#home" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="home">Home</a></li>
+        <li *ngIf="!userLoggedIn();" class="nav-item"><a class="nav-link" id="about-tab" routerLink="about" href="#about" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="about">About</a></li>
+        <li *ngIf="userLoggedIn()&&!checkIsAdmin();" class="nav-item"><a class="nav-link" id="portfolio-tab" routerLink="portfolio" href="#portfolio" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="portfolio">PortfolioModel</a></li>
+        <!-- Navigation function to select documents of the users. Not used at the moment -->
+        <!--        <li *ngIf="checkIsAdmin();" class="nav-item"><a class="nav-link" id="documents-tab" routerLink="documents" href="#documents" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="documents">documents</a></li>-->
+        <li *ngIf="userLoggedIn()&&checkIsAdmin();" class="nav-item"><a class="nav-link" id="users-tab" routerLink="users" href="#users" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="users">users</a></li>
+
+
+        <li class="nav-item"><a class="nav-link" id="contact-tab" routerLink="contact" href="#contact" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="contact">Contact</a></li>
+        <li *ngIf="userLoggedIn(); else loggedOut" class="nav-item"><a class="nav-link" (click)="logoutUser()">Logout</a></li>
+        <ng-template #loggedOut>
+          <li class="nav-item"><a class="nav-link" id="login-tab" routerLink="login" href="#login" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="login">Login</a></li>
+          <li class="nav-item"><a class="nav-link" id="register-tab" routerLink="register" href="#register" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="register">Register</a></li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

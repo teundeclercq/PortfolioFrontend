@@ -1,14 +1,22 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {User} from 'firebase';
-import {Observable, of} from 'rxjs';
-
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {Router} from "@angular/router";
+import {User} from "firebase";
+import {UserModel} from '../model/user.model';
+import {Observable, of, Subject} from 'rxjs';
+import {Admin} from "../model/admin.model";
 @Injectable()
 export class AuthService {
   public user: User;
+  public allowedIdsChanged = new Subject<UserModel[]>();
+  public allowedIds: UserModel [] = [
+  ];
+  private API_URL_DEV = "http://localhost:8081/User/";
+  private API_URL_LIVE = "https://tomcat.teun-school.nl/BackendPortfolio/User/";
   constructor(public afAuth: AngularFireAuth,
-              public router: Router) {
+              public router: Router,
+              public http: HttpClient) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
@@ -18,29 +26,44 @@ export class AuthService {
       }
     });
   }
-  async login(email: string, password: string) {
+  public getAdmins() {
+    return this.http.get(`${this.API_URL_LIVE}roleAdmin/`).subscribe((response: UserModel[]) => {
+      this.allowedIds = response;
+      this.allowedIdsChanged.next(this.allowedIds.slice());
+      console.log(this.allowedIds);
+    });
+  }
+  public async login(email: string, password: string) {
     try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-        // .then(() => this.router.navigate(["boekingen"]));
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        .then((user = JSON.parse(localStorage.getItem("user"))) => {
+          if (this.isAdmin(user.user.uid)) {
+            this.router.navigate(["users"]);
+          } else {
+            this.router.navigate(["portfolio"]);
+          }
+        });
     } catch (e) {
-      alert('Error!'  +  e.message);
+      alert("Error!"  +  e.message);
     }
   }
-
-  async register(email: string, password: string) {
+  public  deleteUser(userId: string) {
+    // nothing happens... yet..
+  }
+  public async register(email: string, password: string) {
     try {
-      await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-        // .then(() => this.router.navigate(["boekingen"]));
+      await this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          this.router.navigate(["portfolio"]);
+        });
     } catch (e) {
       alert("Error!" + e.message);
     }
   }
-
-  async logout() {
+  public async logout() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem("user");
   }
-
   public get isLoggedIn(): any {
     const  user  =  JSON.parse(localStorage.getItem("user"));
     return user !== null;
@@ -55,5 +78,19 @@ export class AuthService {
 
   public getUser() {
     return this.afAuth.auth.currentUser;
+  }
+  public async isAdminLoggedIn() {
+    await this.afAuth.authState.subscribe((user) => {
+      if (this.isAdmin(user.uid)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+  public isAdmin(id: string): boolean {
+    return this.allowedIds.some((element) => {
+      return (this.user && id === element.id);
+    });
   }
 }
