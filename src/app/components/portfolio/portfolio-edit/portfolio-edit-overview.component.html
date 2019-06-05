@@ -10,7 +10,7 @@
   </div>
   <div class="form-group">
     <label for="image">Image</label>
-    <input type="file" (change)="onFileSelected($event)" name="image" id="image" class="form-control" required ngModel accept=".image/jpeg, image/png">
+    <input type="file" (change)="onFileSelectedImage($event)" name="image" id="image" class="form-control" required ngModel accept=".image/jpeg, image/png">
   </div>
   <div class="form-group">
     <label for="description">Content</label>
@@ -18,12 +18,14 @@
               cdkAutosizeMinRows="2"
               cdkAutosizeMaxRows="5"></textarea>
   </div>
-  <div class="form-group">
-    <label for="bestand">Image</label>
-    <input type="file" (change)="onFileSelected($event)" name="image" id="bestand" class="form-control" ngModel accept=".docx,.doc,.pdf,application/pdf,application/msword,
-  application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-  </div>
+
+<!--  Add document - later feature... -->
+<!--  <div class="form-group">-->
+<!--    <label for="file">File</label>-->
+<!--    <input type="file" (change)="onFileSelectedDocument($event)" name="file" id="file" class="form-control" ngModel accept=".docx,.doc,.pdf,application/pdf,application/msword,-->
+<!--  application/vnd.openxmlformats-officedocument.wordprocessingml.document">-->
+<!--  </div>-->
   <button mat-raised-button type="submit">submit</button>
-  <button mat-raised-button8 (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
 </form>
 

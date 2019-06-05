@@ -9,10 +9,11 @@ import {Admin} from "../model/admin.model";
 @Injectable()
 export class AuthService {
   public user: User;
-  private API_URL_DEV = "http://localhost:8081/User/";
   public allowedIdsChanged = new Subject<UserModel[]>();
   public allowedIds: UserModel [] = [
   ];
+  private API_URL_DEV = "http://localhost:8081/User/";
+  private API_URL_LIVE = "https://tomcat.teun-school.nl/BackendPortfolio/User/";
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
               public http: HttpClient) {
@@ -26,7 +27,7 @@ export class AuthService {
     });
   }
   public getAdmins() {
-    return this.http.get(`${this.API_URL_DEV}roleAdmin/`).subscribe((response: UserModel[]) => {
+    return this.http.get(`${this.API_URL_LIVE}roleAdmin/`).subscribe((response: UserModel[]) => {
       this.allowedIds = response;
       this.allowedIdsChanged.next(this.allowedIds.slice());
       console.log(this.allowedIds);

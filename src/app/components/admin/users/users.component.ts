@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
   public user;
   public userId;
   private users: UserModel[];
+  private usersChanged = new Subject<UserModel[]>();
   private subscription: Subscription;
   constructor(private authService: AuthService,
               private userService: UserService) { }
@@ -56,6 +57,7 @@ export class UsersComponent implements OnInit {
           this.subscription = this.userService.usersChanged
             .subscribe((users: UserModel[]) => {
               this.users = users;
+              this.usersChanged.next(this.users.slice());
             });
         });
       } else {

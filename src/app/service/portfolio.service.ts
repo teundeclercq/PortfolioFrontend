@@ -10,12 +10,14 @@ export class PortfolioService {
   public portfolios: Portfolio[] = [];
   public newPortfolio: Portfolio;
   public startedEditing = new Subject<number>();
+  private API_URL_LIVE = "https://tomcat.teun-school.nl/BackendPortfolio/Portfolio/";
+  private API_URL_DEV = "http://localhost:8081/Portfolio/";
   constructor(private http: HttpClient,
               private auth: AuthService) {}
   public getPortfoliosById() {
     // Use http to connect to backend.
     // Gets the Portfolios by UserModel ID of the user that is logged in with Firebase.
-    this.http.get("http://localhost:8081/Portfolio/AllByUID/" + this.auth.getUser().uid)
+    this.http.get(`${this.API_URL_LIVE}AllByUID/` + this.auth.getUser().uid)
       .subscribe((response: Portfolio[]) => {
         this.portfolios = response;
         this.portfoliosChanged.next(this.portfolios.slice());
@@ -28,7 +30,7 @@ export class PortfolioService {
     // Create a portfolio
     this.portfolios.splice(0, 0, portfolio);
     this.portfoliosChanged.next(this.portfolios.slice());
-    return this.http.post("http://localhost:8081/Portfolio/AddByUID",  portfolio);
+    return this.http.post(`${this.API_URL_LIVE}AddByUID`,  portfolio);
   }
   public deletePortfolioById(index: number) {
     // Delete a portfolio
@@ -36,7 +38,7 @@ export class PortfolioService {
     console.log(this.newPortfolio);
     this.portfolios.splice(index, 1);
     this.portfoliosChanged.next(this.portfolios.slice());
-    return this.http.delete("http://localhost:8081/Portfolio/DeleteByUID/" + this.newPortfolio.id);
+    return this.http.delete(`${this.API_URL_LIVE}DeleteByUID/` + this.newPortfolio.id);
   }
   public updatePortfolioById(index: number, portfolio: Portfolio) {
     // Update a portfolio

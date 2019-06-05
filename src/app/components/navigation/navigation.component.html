@@ -14,8 +14,9 @@
         <li *ngIf="!userLoggedIn();" class="nav-item"><a class="nav-link" id="home-tab" routerLink="home" href="#home" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="home">Home</a></li>
         <li *ngIf="!userLoggedIn();" class="nav-item"><a class="nav-link" id="about-tab" routerLink="about" href="#about" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="about">About</a></li>
         <li *ngIf="userLoggedIn()&&!checkIsAdmin();" class="nav-item"><a class="nav-link" id="portfolio-tab" routerLink="portfolio" href="#portfolio" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="portfolio">PortfolioModel</a></li>
-        <li *ngIf="checkIsAdmin();" class="nav-item"><a class="nav-link" id="documents-tab" routerLink="documents" href="#documents" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="documents">documents</a></li>
-        <li *ngIf="checkIsAdmin();" class="nav-item"><a class="nav-link" id="users-tab" routerLink="users" href="#users" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="users">users</a></li>
+        <!-- Navigation function to select documents of the users. Not used at the moment -->
+        <!--        <li *ngIf="checkIsAdmin();" class="nav-item"><a class="nav-link" id="documents-tab" routerLink="documents" href="#documents" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="documents">documents</a></li>-->
+        <li *ngIf="userLoggedIn()&&checkIsAdmin();" class="nav-item"><a class="nav-link" id="users-tab" routerLink="users" href="#users" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="users">users</a></li>
 
 
         <li class="nav-item"><a class="nav-link" id="contact-tab" routerLink="contact" href="#contact" routerLinkActive="active" data-toggle="tab" role="tab" aria-controls="contact">Contact</a></li>

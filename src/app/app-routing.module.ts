@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: "portfolio", component: PortfolioComponent, canActivate: [UserGuard]},
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "documents", component: DocumentsComponent, canActivate: [AdminGuard]},
+  // Documents is not used at the moment.
+  // { path: "documents", component: DocumentsComponent, canActivate: [AdminGuard]},
   { path: "users", component: UsersComponent, canActivate: [AdminGuard]},
 ];
 @NgModule({

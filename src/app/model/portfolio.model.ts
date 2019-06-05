@@ -1,4 +1,5 @@
 import {UserModel} from './user.model';
+import {Document} from './document.model';
 
 export class Portfolio {
   public id?: number;
@@ -7,4 +8,5 @@ export class Portfolio {
   public portfolioImage?: string;
   public description?: string;
   public user?: UserModel;
+  public document?: Document;
 }
