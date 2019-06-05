@@ -15,7 +15,7 @@ import {Document} from '../../../model/document.model';
   styleUrls: ['./portfolio-edit.component.css']
 })
 export class PortfolioEditComponent implements OnInit {
-  private portfolios: Portfolio[];
+  public portfolios: Portfolio[];
   private subscription: Subscription;
   private title: string;
   private subtitle: string;
