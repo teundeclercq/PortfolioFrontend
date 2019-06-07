@@ -27,7 +27,7 @@
           <td class="tableData">{{user.email}}</td>
           <td class="tableData">{{user.role}}</td>
           <td class="tableButton"><button class="mat-raised-button" (click)="deleteUser(i, user.id)">Delete</button></td>
-          <td class="tableButton"><button class="mat-raised-button" (click)="UpdateUser(i, user.id)">{{isUserAdmin(user.role) ? "Promote to Admin" : "Demote to User"}}</button></td>
+          <td class="tableButton"><button class="mat-raised-button" (click)="UpdateUser(i, user.id)">{{isUserAdmin(user.role) ? "Promote to ADMIN" : "Demote to USER"}}</button></td>
         </tr>
         </tbody>
       </table>

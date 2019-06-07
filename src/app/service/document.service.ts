@@ -15,7 +15,7 @@ export class DocumentService {
               private auth: AuthService) {
   }
 
-  // Only for Admin
+  // Only for ADMIN
   public getAllDocuments() {
     // Get all the documents from the server
     this.http.get(`${this.API_URL_LIVE}All/` + this.auth.getUser().uid)
