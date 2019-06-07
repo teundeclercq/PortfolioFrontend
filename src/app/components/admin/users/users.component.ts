@@ -66,7 +66,7 @@ export class UsersComponent implements OnInit {
     });
   }
   public isUserAdmin(role: Role) {
-    if (role === Role.User) {
+    if (role === Role.USER) {
       return true;
     } else {
       return false;

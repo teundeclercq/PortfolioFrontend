@@ -31,10 +31,10 @@ export class UserService {
   }
   public UpdateUser(index: number) {
     this.newUser = this.users[index];
-    if (this.newUser.role === Role.Admin) {
-      this.newUser.role = Role.User;
+    if (this.newUser.role === Role.ADMIN) {
+      this.newUser.role = Role.USER;
     } else {
-      this.newUser.role = Role.Admin;
+      this.newUser.role = Role.ADMIN;
     }
     this.usersChanged.next(this.users.slice());
     return this.http.put(`${this.API_URL_LIVE}Update/`, this.newUser);
