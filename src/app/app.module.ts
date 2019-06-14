@@ -27,6 +27,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {UserService} from './service/user.service';
 import {DocumentService} from './service/document.service';
 import {AdminGuard} from './service/admin.guard';
+import {ApiurlService} from './service/apiurl.service';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -61,6 +62,6 @@ import {AdminGuard} from './service/admin.guard';
     MatInputModule,
     BrowserAnimationsModule,
   ],
-  providers: [AuthService, UserGuard, PortfolioService, UserService, DocumentService, AdminGuard],
+  providers: [AuthService, UserGuard, PortfolioService, UserService, DocumentService, AdminGuard, ApiurlService],
 })
 export class AppModule { }

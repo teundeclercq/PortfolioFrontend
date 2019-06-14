@@ -45,9 +45,7 @@ export class PortfolioEditComponent implements OnInit {
   }
 
   deletePortfolio(index: number) {
-    this.portfolioService.deletePortfolioById(index).subscribe((response) => {
-      console.log(response);
-    });
+    this.portfolioService.deletePortfolioById(index);
   }
 }
 

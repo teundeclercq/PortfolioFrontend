@@ -3,6 +3,7 @@ import {Component} from "@angular/core";
 import {Role} from "../../model/role.model";
 import {UserModel} from "../../model/user.model";
 import {AuthService} from "../../service/auth.service";
+import {ApiurlService} from '../../service/apiurl.service';
 
 @Component({
   selector: "app-register",
@@ -11,12 +12,10 @@ import {AuthService} from "../../service/auth.service";
 })
 export class RegisterComponent {
   private user: UserModel;
-  private API_URL_DEV = "http://localhost:8081/User/";
-
-  private API_URL_LIVE = "https://tomcat.teun-school.nl/BackendPortfolio/User/";
 
   constructor(private authService: AuthService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private apiurlService: ApiurlService) {
   }
 
   public registerUser(username, email, password) {
@@ -27,7 +26,7 @@ export class RegisterComponent {
       this.user.id = this.authService.getUser().uid;
       this.user.role = Role.USER;
       console.log(this.user);
-      this.http.post(`${this.API_URL_LIVE}AddUser/`, this.user).subscribe((result: JSON) => {
+      this.http.post(`${this.apiurlService.API_URL}User/AddUser/`, this.user).subscribe((result: JSON) => {
         // tslint:disable-next-line:no-console
         console.log(result);
       });
