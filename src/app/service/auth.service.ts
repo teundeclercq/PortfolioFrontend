@@ -6,17 +6,17 @@ import {User} from "firebase";
 import {UserModel} from '../model/user.model';
 import {Observable, of, Subject} from 'rxjs';
 import {Admin} from "../model/admin.model";
+import {ApiurlService} from './apiurl.service';
 @Injectable()
 export class AuthService {
   public user: User;
   public allowedIdsChanged = new Subject<UserModel[]>();
   public allowedIds: UserModel [] = [
   ];
-  private API_URL_DEV = "http://localhost:8081/User/";
-  private API_URL_LIVE = "https://tomcat.teun-school.nl/BackendPortfolio/User/";
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
-              public http: HttpClient) {
+              public http: HttpClient,
+              private apiurlService: ApiurlService) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
@@ -27,7 +27,7 @@ export class AuthService {
     });
   }
   public getAdmins() {
-    return this.http.get(`${this.API_URL_LIVE}roleAdmin/`).subscribe((response: UserModel[]) => {
+    return this.http.get(`${this.apiurlService.API_URL}User/roleAdmin/`).subscribe((response: UserModel[]) => {
       this.allowedIds = response;
       this.allowedIdsChanged.next(this.allowedIds.slice());
       console.log(this.allowedIds);

@@ -9,7 +9,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {PortfolioComponent} from "./components/portfolio/portfolio.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {UserGuard} from "./service/user.guard";
-import {AdminGuard} from './service/admin.guard';
+import {AdminGuard} from "./service/admin.guard";
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "home", component: HomeComponent},

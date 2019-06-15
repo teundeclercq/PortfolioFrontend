@@ -15,7 +15,7 @@ import {Document} from '../../../model/document.model';
   styleUrls: ['./portfolio-edit.component.css']
 })
 export class PortfolioEditComponent implements OnInit {
-  public portfolios: Portfolio[];
+  public portfolios: Portfolio[] = [];
   private subscription: Subscription;
   private title: string;
   private subtitle: string;
@@ -45,9 +45,8 @@ export class PortfolioEditComponent implements OnInit {
   }
 
   deletePortfolio(index: number) {
-    this.portfolioService.deletePortfolioById(index).subscribe((response) => {
-      console.log(response);
-    });
+    this.portfolioService.deletePortfolioById(index)
+      .subscribe((response) => { console.log(response); });
   }
 }
 

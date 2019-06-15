@@ -3,22 +3,22 @@ import {Subject} from 'rxjs';
 import {Document} from '../model/document.model';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
+import {ApiurlService} from './apiurl.service';
 @Injectable()
 export class DocumentService {
   public documentsChanged = new Subject<Document[]>();
   public documents: Document[] = [];
   public newDocument: Document;
   public startedEditing = new Subject<number>();
-  private API_URL_LIVE = "https://tomcat.teun-school.nl/BackendPortfolio/Document/";
-  private API_URL_DEV = "http://localhost:8081/Document/";
   constructor(private http: HttpClient,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private apiurlService: ApiurlService) {
   }
 
   // Only for ADMIN
   public getAllDocuments() {
     // Get all the documents from the server
-    this.http.get(`${this.API_URL_LIVE}All/` + this.auth.getUser().uid)
+    this.http.get(`${this.apiurlService.API_URL}Document/All/` + this.auth.getUser().uid)
       .subscribe((response: Document[]) => {
         this.documents = response;
         this.documentsChanged.next(this.documents.slice());
@@ -26,7 +26,7 @@ export class DocumentService {
   }
   public getDocumentsByPortfolioId(id: number) {
     // Get all the documents from the server based on the userId.
-    this.http.get(`${this.API_URL_LIVE}ByPortfolio/` + id)
+    this.http.get(`${this.apiurlService.API_URL}Document/ByPortfolio/` + id)
       .subscribe((response: Document[]) => {
         this.documents = response;
         this.documentsChanged.next(this.documents.slice());
@@ -37,7 +37,7 @@ export class DocumentService {
     // Add a document to the server
     this.documents.splice(0, 0, document);
     this.documentsChanged.next(this.documents.slice());
-    return this.http.post(`${this.API_URL_LIVE}Add/`, document);
+    return this.http.post(`${this.apiurlService.API_URL}Document/Add/`, document);
   }
   // method for user to delete a specific document
   public deleteDocumentAsUser(index: number) {
@@ -45,7 +45,7 @@ export class DocumentService {
     this.newDocument = this.documents[index];
     this.documents.splice(index, 1);
     this.documentsChanged.next(this.documents.slice());
-    return this.http.delete(`${this.API_URL_LIVE}Delete/` + this.newDocument.id);
+    return this.http.delete(`${this.apiurlService.API_URL}Document/Delete/` + this.newDocument.id);
   }
   public updateDocument(index: number, document: Document) {
     // Update a document
