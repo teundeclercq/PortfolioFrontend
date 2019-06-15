@@ -10,7 +10,7 @@ export class PortfolioService {
   public portfoliosChanged = new Subject<Portfolio[]>();
   public portfolios: Portfolio[] = [];
   public newPortfolio: Portfolio;
-  public startedEditing = new Subject<number>();
+  startedEditing = new Subject<number>();
 
   constructor(private http: HttpClient,
               private auth: AuthService,
@@ -43,8 +43,7 @@ export class PortfolioService {
   }
   public updatePortfolioById(index: number, portfolio: Portfolio) {
     // Update a portfolio
-    this.deletePortfolioById(index);
-    return this.addPortfolioById(portfolio);
+    return this.http.post(`${this.apiurlService.API_URL}Portfolio/Update`, portfolio);
   }
 
 }

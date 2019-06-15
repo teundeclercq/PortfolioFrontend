@@ -17,10 +17,9 @@ import {Document} from '../../../model/document.model';
 export class PortfolioEditComponent implements OnInit {
   public portfolios: Portfolio[] = [];
   private subscription: Subscription;
-  private title: string;
-  private subtitle: string;
-  private content: string;
-
+  public title: string;
+  public subtitle: string;
+  public description: string;
   constructor(private dialog: MatDialog,
               private portfolioService: PortfolioService) {
   }
@@ -32,11 +31,26 @@ export class PortfolioEditComponent implements OnInit {
         this.portfolios = portfolios;
       });
   }
+  EditItem(index: number) {
 
-  openDialog(): void {
+    console.log(index);
+  }
+  openDialog(index: number): void {
     const dialogRef = this.dialog.open(PortfolioEditOverviewComponent, {
       width: '400px',
-      data: {title: this.title, subtitle: this.subtitle, content: this.content},
+      data: {id: this.portfolios[index].id, title: this.portfolios[index].title, subtitle: this.portfolios[index].subtitle, content: this.portfolios[index].description},
+    });
+    dialogRef.afterOpened().subscribe(() => {
+      this.portfolioService.startedEditing.next(index);
+    })
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+  openDialogNoPortfolios(): void {
+    const dialogRef = this.dialog.open(PortfolioEditOverviewComponent, {
+      width: '400px',
+      data: {title: this.title, subtitle: this.subtitle, content: this.description},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -54,8 +68,8 @@ export class PortfolioEditComponent implements OnInit {
   selector: 'app-portfolio-edit-overview',
   templateUrl: './portfolio-edit-overview.component.html',
 })
-export class PortfolioEditOverviewComponent implements OnInit, OnDestroy {
-  private editMode = false;
+export class PortfolioEditOverviewComponent implements OnInit {
+  editMode = false;
   private user: UserModel = new UserModel();
   private portfolio: Portfolio = new Portfolio();
   private document: Document = new Document();
@@ -72,17 +86,15 @@ export class PortfolioEditOverviewComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   ngOnInit() {
     this.subscription = this.portfolioService.startedEditing
       .subscribe((index: number) => {
         this.editedPortolfioIndex = index;
         this.editMode = true;
+        console.log(this.editMode);
         this.editedPortfolio = this.portfolioService.getPortfolio(index);
       });
+
   }
 
   // unused function. No use for this at the moment.
@@ -146,7 +158,8 @@ export class PortfolioEditOverviewComponent implements OnInit, OnDestroy {
   //   console.log(btoa(binaryString));
   // }
 
-  public onSubmit(form: NgForm) {
+  public onSubmit(form: NgForm, id: number) {
+    this.portfolio.id = id;
     this.portfolio.title = form.value.title;
     this.portfolio.subtitle = form.value.subtitle;
     this.portfolio.description = form.value.description;
@@ -161,7 +174,8 @@ export class PortfolioEditOverviewComponent implements OnInit, OnDestroy {
 
     console.log(form);
     console.log(this.portfolio);
-    if (this.editMode === true) {
+    console.log(this.editMode);
+    if (this.editMode) {
       this.portfolioService.updatePortfolioById(this.editedPortolfioIndex, this.portfolio)
         .subscribe(() => {
           this.portfolioService.getPortfoliosById();
