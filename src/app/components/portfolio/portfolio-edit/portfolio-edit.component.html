@@ -7,6 +7,12 @@
 </div>
 <ng-template #showPortfolios>
   <div class="row">
+    <div class="container">
+      <button mat-raised-button (click)="openDialogNoPortfolios()">Creeër een PortfolioModel</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
     <div class="col-md-4" *ngFor="let portfolio of portfolios; let i = index;">
       <mat-card class="example-card">
         <mat-card-header>
