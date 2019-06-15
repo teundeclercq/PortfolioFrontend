@@ -1,20 +1,20 @@
 <h1 mat-dialog-title>PortfolioModel</h1>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form (ngSubmit)="onSubmit(f, data.id)" #f="ngForm">
   <div class="form-group">
     <label for="title">Title</label>
-    <input type="text" id="title" name="title" placeholder="Enter Title of the PortfolioModel" ngModel class="form-control" required>
+    <input type="text" id="title" name="title" placeholder="Enter Title of the PortfolioModel" [ngModel]="data.title" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="subtitle">Subtitle</label>
-    <input type="text" id="subtitle" name="subtitle" placeholder="Enter Subtitle of the PortfolioModel" ngModel class="form-control" required>
+    <input type="text" id="subtitle" name="subtitle" placeholder="Enter Subtitle of the PortfolioModel" [ngModel]="data.subtitle" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="image">Image</label>
-    <input type="file" (change)="onFileSelectedImage($event)" name="image" id="image" class="form-control" required ngModel accept=".image/jpeg, image/png">
+    <input type="file" (change)="onFileSelectedImage($event)" name="image" id="image" class="form-control" required  accept=".image/jpeg, image/png">
   </div>
   <div class="form-group">
     <label for="description">Content</label>
-    <textarea type="text" id="description" name="description" placeholder="Enter Subtitle of the PortfolioModel" ngModel class="form-control" required cdkTextareaAutosize
+    <textarea type="text" id="description" name="description" placeholder="Enter Subtitle of the PortfolioModel" [ngModel]="data.content" class="form-control" required cdkTextareaAutosize
               cdkAutosizeMinRows="2"
               cdkAutosizeMaxRows="5"></textarea>
   </div>
@@ -25,7 +25,7 @@
 <!--    <input type="file" (change)="onFileSelectedDocument($event)" name="file" id="file" class="form-control" ngModel accept=".docx,.doc,.pdf,application/pdf,application/msword,-->
 <!--  application/vnd.openxmlformats-officedocument.wordprocessingml.document">-->
 <!--  </div>-->
-  <button mat-raised-button type="submit">submit</button>
-  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button type="submit" (click)="dialogRef.close()">{{editMode ? "Update" : "Add"}}</button>
+  <button mat-raised-button type="button" (click)="onNoClick()">No Thanks</button>
 </form>
 

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="center-screen" *ngIf="portfolios.length === 0; else showPortfolios">
     <div class="container">
-      <button mat-raised-button (click)="openDialog()">Creeër een PortfolioModel</button>
+      <button mat-raised-button (click)="openDialogNoPortfolios()">Creeër een PortfolioModel</button>
     </div>
   </div>
 </div>
@@ -21,7 +21,7 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-button (click)="deletePortfolio(i)">delete</button>
-          <button mat-button (click)="openDialog()">update</button>
+          <button mat-button (click)="openDialog(i)">update</button>
         </mat-card-actions>
       </mat-card>
     </div>
