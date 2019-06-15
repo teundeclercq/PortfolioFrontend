@@ -39,7 +39,7 @@ export class PortfolioService {
     this.portfolios.splice(index, 1);
     this.portfoliosChanged.next(this.portfolios.slice());
     console.log(this.newPortfolio);
-    this.http.delete(`${this.apiurlService.API_URL}Portfolio/DeleteByUID/${this.newPortfolio.id}`).subscribe((response) => { console.log(response); });
+    return this.http.delete(`${this.apiurlService.API_URL}Portfolio/DeleteByUID/${this.newPortfolio.id}`);
   }
   public updatePortfolioById(index: number, portfolio: Portfolio) {
     // Update a portfolio
