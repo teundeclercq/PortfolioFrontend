@@ -26,7 +26,7 @@ export class RegisterComponent {
       this.user.id = this.authService.getUser().uid;
       this.user.role = Role.USER;
       console.log(this.user);
-      this.http.post(`${this.apiurlService.API_URL}User/AddUser/`, this.user).subscribe((result: JSON) => {
+      this.http.post(`${this.apiurlService.API_URL}Users/`, this.user).subscribe((result: JSON) => {
         // tslint:disable-next-line:no-console
         console.log(result);
       });
