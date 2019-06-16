@@ -18,7 +18,7 @@ export class PortfolioService {
   public getPortfoliosById() {
     // Use http to connect to backend.
     // Gets the Portfolios by UserModel ID of the user that is logged in with Firebase.
-    this.http.get(`${this.apiurlService.API_URL}Portfolio/AllByUID/` + this.auth.getUser().uid)
+    this.http.get(`${this.apiurlService.API_URL}Portfolios/User/` + this.auth.getUser().uid)
       .subscribe((response: Portfolio[]) => {
         this.portfolios = response;
         this.portfoliosChanged.next(this.portfolios.slice());
@@ -31,7 +31,7 @@ export class PortfolioService {
     // Create a portfolio
     this.portfolios.splice(0, 0, portfolio);
     this.portfoliosChanged.next(this.portfolios.slice());
-    return this.http.post(`${this.apiurlService.API_URL}Portfolio/AddByUID`,  portfolio);
+    return this.http.post(`${this.apiurlService.API_URL}Portfolios/`,  portfolio);
   }
   public deletePortfolioById(index: number) {
     // Delete a portfolio
@@ -39,11 +39,11 @@ export class PortfolioService {
     this.portfolios.splice(index, 1);
     this.portfoliosChanged.next(this.portfolios.slice());
     console.log(this.newPortfolio);
-    return this.http.delete(`${this.apiurlService.API_URL}Portfolio/DeleteByUID/${this.newPortfolio.id}`);
+    return this.http.delete(`${this.apiurlService.API_URL}Portfolios/${this.newPortfolio.id}`);
   }
   public updatePortfolioById(index: number, portfolio: Portfolio) {
     // Update a portfolio
-    return this.http.post(`${this.apiurlService.API_URL}Portfolio/Update`, portfolio);
+    return this.http.put(`${this.apiurlService.API_URL}Portfolios/`, portfolio);
   }
 
 }

@@ -13,9 +13,10 @@ export class UserService {
   public newUser: UserModel;
   constructor(private http: HttpClient,
               private auth: AuthService,
-              private apiurlService: ApiurlService) {}
+              private apiurlService: ApiurlService) {
+  }
   public getAllUsers() {
-    this.http.get(`${this.apiurlService.API_URL}User/All/` + this.auth.getUser().uid)
+    this.http.get(`${this.apiurlService.API_URL}Users/` + this.auth.getUser().uid)
       .subscribe((response: UserModel[]) => {
         this.users = response;
         this.usersChanged.next(this.users.slice());
@@ -26,7 +27,7 @@ export class UserService {
     this.users.splice(index, 1);
     this.usersChanged.next(this.users.slice());
     console.log(this.newUser.id);
-    return this.http.delete(`${this.apiurlService.API_URL}User/Delete/` + this.newUser.id);
+    return this.http.delete(`${this.apiurlService.API_URL}Users/` + this.newUser.id);
   }
   public UpdateUser(index: number) {
     this.newUser = this.users[index];
@@ -36,13 +37,13 @@ export class UserService {
       this.newUser.role = Role.ADMIN;
     }
     this.usersChanged.next(this.users.slice());
-    return this.http.put(`${this.apiurlService.API_URL}User/Update/`, this.newUser);
+    return this.http.put(`${this.apiurlService.API_URL}Users/`, this.newUser);
   }
   public removeUserFromAdminGroup(index: number) {
     this.newUser = this.users[index];
     this.users.splice(index, 1);
     this.usersChanged.next(this.users.slice());
-    return this.http.delete(`${this.apiurlService.API_URL}User/Update/` + this.newUser.id);
+    return this.http.delete(`${this.apiurlService.API_URL}Users/` + this.newUser.id);
   }
   public getUser(index: number) {
     return this.users[index];

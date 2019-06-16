@@ -27,7 +27,7 @@ export class AuthService {
     });
   }
   public getAdmins() {
-    return this.http.get(`${this.apiurlService.API_URL}User/roleAdmin/`).subscribe((response: UserModel[]) => {
+    return this.http.get(`${this.apiurlService.API_URL}Users/Admin`).subscribe((response: UserModel[]) => {
       this.allowedIds = response;
       this.allowedIdsChanged.next(this.allowedIds.slice());
       console.log(this.allowedIds);
